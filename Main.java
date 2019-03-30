@@ -13,7 +13,7 @@ public class Main {
 				Archive<Game> gameFile;
 
 				gameFile = new Archive<>(Game.class.getConstructor(), "./db/game.db", "./db/index.db");
-				gameFile.include(UserInterface.readGame());
+				gameFile.include(UserInterface.readGame(), -1);
 
 				break;
 			}
@@ -39,7 +39,7 @@ public class Main {
 
 				gameFile = new Archive<>(Game.class.getConstructor(), "./db/game.db", "./db/index.db");
 				if (gameFile.exclude(id)){
-					gameFile.include(UserInterface.readGame());
+					gameFile.include(UserInterface.readGame(), id);
 					System.out.println("\n-> Jogo Alterado com Sucesso!\n");				
 				}
 				else
@@ -99,6 +99,9 @@ public class Main {
 			case 7: {
 			    System.exit(0);
 			}
+			default:{
+				break;
+			}
 		}
 	}
 
@@ -124,6 +127,6 @@ public class Main {
 			} catch (NumberFormatException e) {
 				System.out.println("Opção inválida!");
 			}
-		} while (op != 0);
+		} while (true);
 	}
 }

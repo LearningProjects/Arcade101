@@ -24,14 +24,18 @@ public class Archive<T extends FileObject> {
         }
     }
     
-    public int include(T obj) throws IOException {
+    public int include(T obj, int id) throws IOException {
         int lastID;
         file.seek(0);
         lastID = file.readInt();
         file.seek(0);
-        file.writeInt(lastID+1);
-        obj.setId(lastID+1);
-        
+        if(id == -1){
+            file.writeInt(lastID+1);
+            obj.setId(lastID+1);
+        }
+        else{
+            obj.setId(id);
+        }        
         file.seek(file.length());
         long address = file.getFilePointer();
         byte[] b;
